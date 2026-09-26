@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}All Users{% endblock %}
+{% block content %}
+<h2 class="fw-bold mb-4">All Users</h2>
+<div class="card shadow-sm">
+<div class="table-responsive">
+<table class="table table-hover mb-0">
+<thead><tr><th>ID</th><th>Name</th><th>Username</th><th>Role</th><th>Status</th><th>Action</th></tr></thead>
+<tbody>
+{% for user in users %}
+<tr>
+<td>{{ user.id }}</td><td>{{ user.full_name }}</td><td>{{ user.username }}</td>
+<td>{{ user.role|replace('_',' ')|title }}</td>
+<td><span class="badge bg-{{ 'success' if user.is_active else 'secondary' }}">{{ 'Active' if user.is_active else 'Disabled' }}</span></td>
+<td>
+{% if user.id != 1 %}
+<form method="POST" action="{{ url_for('super_admin.toggle_user', user_id=user.id) }}">
+<button class="btn btn-sm btn-outline-{{ 'danger' if user.is_active else 'success' }}">{{ 'Disable' if user.is_active else 'Enable' }}</button>
+</form>
+{% else %}<span class="text-muted">Protected</span>{% endif %}
+</td>
+</tr>
+{% endfor %}
+</tbody>
+</table>
+</div>
+</div>
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block title %}Manage Admins{% endblock %}
+{% block content %}
+<h2 class="fw-bold mb-4">Manage Admins</h2>
+<div class="card shadow-sm mb-4">
+    <div class="card-body">
+        <h5>Create Admin Account</h5>
+        <form method="POST" class="row g-3">
+            <div class="col-md-6"><label class="form-label">Full Name</label><input name="full_name" class="form-control" required></div>
+            <div class="col-md-6"><label class="form-label">Email</label><input type="email" name="email" class="form-control"></div>
+            <div class="col-md-4"><label class="form-label">Username</label><input name="username" class="form-control" required></div>
+            <div class="col-md-4"><label class="form-label">Password</label><input type="password" name="password" class="form-control" required></div>
+            <div class="col-md-4 d-flex align-items-end"><button class="btn btn-primary w-100">Create Admin</button></div>
+        </form>
+    </div>
+</div>
+<div class="card shadow-sm">
+    <div class="table-responsive">
+        <table class="table table-hover mb-0">
+            <thead><tr><th>ID</th><th>Name</th><th>Username</th><th>Email</th><th>Status</th></tr></thead>
+            <tbody>
+            {% for admin in admins %}
+            <tr>
+                <td>{{ admin.id }}</td><td>{{ admin.full_name }}</td><td>{{ admin.username }}</td><td>{{ admin.email or '-' }}</td>
+                <td><span class="badge bg-{{ 'success' if admin.is_active else 'secondary' }}">{{ 'Active' if admin.is_active else 'Disabled' }}</span></td>
+            </tr>
+            {% else %}<tr><td colspan="5" class="text-center py-4">No admins yet.</td></tr>{% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

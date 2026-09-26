@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}Admin Dashboard{% endblock %}
+{% block content %}
+<h2 class="fw-bold mb-4">Admin Dashboard</h2>
+<div class="row g-4">
+{% for label, value in [('Students', stats.students), ('Pending', stats.pending), ('Approved', stats.approved), ('Rejected', stats.rejected)] %}
+<div class="col-md-3"><div class="stat-card"><div>{{ label }}</div><strong>{{ value }}</strong></div></div>
+{% endfor %}
+</div>
+<div class="card shadow-sm mt-4">
+<div class="card-body">
+<h5>Enrollment Management</h5>
+<p class="text-muted">Review student information and approve, reject, or return enrollment applications.</p>
+<a href="{{ url_for('admin.enrollments') }}" class="btn btn-primary">View Enrollments</a>
+</div>
+</div>
+{% endblock %}

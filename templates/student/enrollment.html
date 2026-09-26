@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}Submit Enrollment{% endblock %}
+{% block content %}
+<h2 class="fw-bold mb-4">Submit Enrollment</h2>
+<div class="card shadow-sm">
+<div class="card-body">
+<p><strong>Student:</strong> {{ student.student_number }} — {{ student.first_name }} {{ student.last_name }}</p>
+<form method="POST" class="row g-3">
+<div class="col-md-6"><label class="form-label">School Year</label><input name="school_year" class="form-control" placeholder="2026-2027" required></div>
+<div class="col-md-6"><label class="form-label">Semester</label><select name="semester" class="form-select" required><option value="">Select semester</option><option>1st Semester</option><option>2nd Semester</option><option>Summer</option></select></div>
+<div class="col-12"><button class="btn btn-primary">Submit Enrollment</button></div>
+</form>
+</div>
+</div>
+{% endblock %}

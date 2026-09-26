@@ -1,0 +1,29 @@
+body { background: #f5f7fb; }
+.navbar-brand { letter-spacing: .5px; }
+.card { border: 0; border-radius: 14px; }
+.stat-card, .info-card {
+    background: white;
+    border-radius: 14px;
+    padding: 24px;
+    box-shadow: 0 5px 20px rgba(0,0,0,.06);
+}
+.stat-card strong { display:block; font-size: 2rem; margin-top: 8px; }
+.info-card small { color:#6c757d; display:block; }
+.info-card strong { display:block; margin-top:7px; }
+.login-page {
+    min-height: 100vh; display:flex; align-items:center; justify-content:center;
+    background: linear-gradient(135deg,#0d6efd,#6f42c1);
+}
+.login-card {
+    width:min(430px,92%); background:white; border-radius:20px;
+    padding:35px; box-shadow:0 20px 50px rgba(0,0,0,.18);
+}
+.brand-circle {
+    width:70px;height:70px;border-radius:50%;background:#0d6efd;color:white;
+    display:flex;align-items:center;justify-content:center;margin:auto;font-weight:bold;font-size:20px;
+}
+.demo-box { background:#f8f9fa; padding:14px; border-radius:10px; font-size:.9rem; }
+.status-pending { background:#ffc107; color:#212529; }
+.status-approved { background:#198754; color:white; }
+.status-rejected { background:#dc3545; color:white; }
+.table { vertical-align:middle; }

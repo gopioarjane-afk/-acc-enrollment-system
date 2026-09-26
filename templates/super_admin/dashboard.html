@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}Super Admin Dashboard{% endblock %}
+{% block content %}
+<h2 class="fw-bold mb-4">Super Admin Dashboard</h2>
+<div class="row g-4">
+    <div class="col-md-3"><div class="stat-card"><div>Users</div><strong>{{ stats.users }}</strong></div></div>
+    <div class="col-md-3"><div class="stat-card"><div>Admins</div><strong>{{ stats.admins }}</strong></div></div>
+    <div class="col-md-3"><div class="stat-card"><div>Students</div><strong>{{ stats.students }}</strong></div></div>
+    <div class="col-md-3"><div class="stat-card"><div>Pending</div><strong>{{ stats.pending }}</strong></div></div>
+</div>
+<div class="card mt-4 shadow-sm">
+    <div class="card-body">
+        <h5>System Access</h5>
+        <p class="text-muted">As Super Admin, you can manage admin accounts, users, students, and enrollment records.</p>
+    </div>
+</div>
+{% endblock %}

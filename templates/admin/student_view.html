@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block title %}Student Details{% endblock %}
+{% block content %}
+<a href="{{ url_for('admin.students') }}" class="btn btn-link px-0">← Back to Students</a>
+<h2 class="fw-bold mb-4">Student Details</h2>
+<div class="card shadow-sm mb-4">
+<div class="card-body">
+<div class="row g-3">
+<div class="col-md-4"><strong>Student Number</strong><br>{{ student.student_number }}</div>
+<div class="col-md-4"><strong>Name</strong><br>{{ student.first_name }} {{ student.middle_name or '' }} {{ student.last_name }}</div>
+<div class="col-md-4"><strong>Username</strong><br>{{ student.username }}</div>
+<div class="col-md-4"><strong>Birth Date</strong><br>{{ student.birth_date or '-' }}</div>
+<div class="col-md-4"><strong>Sex</strong><br>{{ student.sex or '-' }}</div>
+<div class="col-md-4"><strong>Phone</strong><br>{{ student.phone or '-' }}</div>
+<div class="col-md-6"><strong>Course</strong><br>{{ student.course or '-' }}</div>
+<div class="col-md-6"><strong>Year Level</strong><br>{{ student.year_level or '-' }}</div>
+<div class="col-12"><strong>Address</strong><br>{{ student.address or '-' }}</div>
+</div>
+</div>
+</div>
+<h5>Enrollment History</h5>
+<div class="card shadow-sm">
+<table class="table table-hover mb-0">
+<thead><tr><th>School Year</th><th>Semester</th><th>Status</th><th>Remarks</th></tr></thead>
+<tbody>
+{% for e in enrollments %}
+<tr><td>{{ e.school_year }}</td><td>{{ e.semester }}</td><td><span class="badge status-{{ e.status|lower }}">{{ e.status }}</span></td><td>{{ e.remarks or '-' }}</td></tr>
+{% else %}<tr><td colspan="4" class="text-center py-4">No enrollment records.</td></tr>{% endfor %}
+</tbody>
+</table>
+</div>
+{% endblock %}

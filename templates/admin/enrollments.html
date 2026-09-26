@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block title %}Enrollments{% endblock %}
+{% block content %}
+<h2 class="fw-bold mb-4">Enrollment Applications</h2>
+<div class="card shadow-sm">
+<div class="table-responsive">
+<table class="table table-hover align-middle mb-0">
+<thead><tr><th>Student</th><th>School Year</th><th>Semester</th><th>Status</th><th>Update</th></tr></thead>
+<tbody>
+{% for e in enrollments %}
+<tr>
+<td>{{ e.student_number }}<br><small>{{ e.first_name }} {{ e.last_name }}</small></td>
+<td>{{ e.school_year }}</td><td>{{ e.semester }}</td>
+<td><span class="badge status-{{ e.status|lower }}">{{ e.status }}</span></td>
+<td>
+<form method="POST" action="{{ url_for('admin.update_enrollment', enrollment_id=e.id) }}" class="d-flex gap-2">
+<select name="status" class="form-select form-select-sm">
+{% for status in ['Pending','Approved','Rejected'] %}
+<option {% if e.status == status %}selected{% endif %}>{{ status }}</option>
+{% endfor %}
+</select>
+<input name="remarks" class="form-control form-control-sm" placeholder="Remarks" value="{{ e.remarks or '' }}">
+<button class="btn btn-sm btn-primary">Save</button>
+</form>
+</td>
+</tr>
+{% else %}<tr><td colspan="5" class="text-center py-4">No enrollment applications.</td></tr>{% endfor %}
+</tbody>
+</table>
+</div>
+</div>
+{% endblock %}

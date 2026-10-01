@@ -1,0 +1,148 @@
+{% extends "base.html" %}
+
+{% block title %}Enrollment{% endblock %}
+
+{% block content %}
+
+<div class="page-header">
+    <h2>Student Enrollment</h2>
+
+    <p class="text-muted mb-0">
+        Submit your enrollment application for the current school year.
+    </p>
+</div>
+
+
+<div class="profile-card">
+
+    <form method="POST">
+
+        <div class="row g-4">
+
+            <!-- PROGRAM -->
+            <div class="col-md-6">
+
+                <label class="form-label">
+                    Academic Program
+                </label>
+
+                <select
+                    name="program_id"
+                    class="form-select"
+                    required>
+
+                    <option value="">
+                        Select Program
+                    </option>
+
+                    {% for program in programs %}
+
+                    <option value="{{ program.id }}">
+                        {{ program.program_code }}
+                        - 
+                        {{ program.program_name }}
+                    </option>
+
+                    {% endfor %}
+
+                </select>
+
+            </div>
+
+
+            <!-- SCHOOL YEAR -->
+            <div class="col-md-6">
+
+                <label class="form-label">
+                    School Year
+                </label>
+
+                <input
+                    type="text"
+                    name="school_year"
+                    class="form-control"
+                    placeholder="Example: 2026-2027"
+                    required>
+
+            </div>
+
+
+            <!-- SEMESTER -->
+            <div class="col-md-6">
+
+                <label class="form-label">
+                    Semester
+                </label>
+
+                <select
+                    name="semester"
+                    class="form-select"
+                    required>
+
+                    <option value="">
+                        Select Semester
+                    </option>
+
+                    <option value="1st Semester">
+                        1st Semester
+                    </option>
+
+                    <option value="2nd Semester">
+                        2nd Semester
+                    </option>
+
+                    <option value="Summer">
+                        Summer
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <!-- INFORMATION -->
+            <div class="col-12">
+
+                <div class="alert alert-info">
+
+                    <strong>Important:</strong>
+
+                    Your enrollment application will be submitted
+                    with a <strong>Pending</strong> status.
+
+                    An administrator will review your application
+                    before it is approved.
+
+                </div>
+
+            </div>
+
+
+            <!-- BUTTONS -->
+            <div class="col-12">
+
+                <button
+                    type="submit"
+                    class="btn btn-primary">
+
+                    Submit Enrollment
+
+                </button>
+
+                <a
+                    href="{{ url_for('student.dashboard') }}"
+                    class="btn btn-secondary">
+
+                    Cancel
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </form>
+
+</div>
+
+{% endblock %}

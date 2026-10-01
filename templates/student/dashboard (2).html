@@ -1,0 +1,177 @@
+{% extends "base.html" %}
+
+{% block title %}Student Dashboard{% endblock %}
+
+{% block content %}
+
+<div class="page-header">
+    <h2>Student Dashboard</h2>
+
+    <p class="text-muted mb-0">
+        Welcome, {{ current_user.full_name }}.
+        Manage your student profile and enrollment.
+    </p>
+</div>
+
+
+{% if student %}
+
+<div class="row g-4">
+
+    <!-- STUDENT INFORMATION -->
+    <div class="col-lg-6">
+
+        <div class="dashboard-card">
+
+            <h5 class="mb-3">
+                Student Information
+            </h5>
+
+            <div class="mb-2">
+                <strong>Student ID:</strong>
+                {{ student.student_id }}
+            </div>
+
+            <div class="mb-2">
+                <strong>Name:</strong>
+                {{ student.first_name }}
+
+                {% if student.middle_name %}
+                    {{ student.middle_name }}
+                {% endif %}
+
+                {{ student.last_name }}
+            </div>
+
+            <div class="mb-2">
+                <strong>Email:</strong>
+                {{ student.email or "Not provided" }}
+            </div>
+
+            <div class="mb-3">
+                <strong>Phone:</strong>
+                {{ student.phone or "Not provided" }}
+            </div>
+
+            <a
+                href="{{ url_for('student.profile') }}"
+                class="btn btn-primary">
+                Edit Profile
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <!-- ENROLLMENT STATUS -->
+    <div class="col-lg-6">
+
+        <div class="dashboard-card">
+
+            <h5 class="mb-3">
+                Latest Enrollment
+            </h5>
+
+            {% if enrollment %}
+
+                <div class="mb-2">
+                    <strong>Program:</strong>
+                    {{ enrollment.program_code }}
+                    -
+                    {{ enrollment.program_name }}
+                </div>
+
+                <div class="mb-2">
+                    <strong>School Year:</strong>
+                    {{ enrollment.school_year }}
+                </div>
+
+                <div class="mb-2">
+                    <strong>Semester:</strong>
+                    {{ enrollment.semester }}
+                </div>
+
+                <div class="mb-3">
+
+                    <strong>Status:</strong>
+
+                    {% if enrollment.status == "Pending" %}
+
+                        <span class="status-badge status-pending">
+                            Pending
+                        </span>
+
+                    {% elif enrollment.status == "Approved" %}
+
+                        <span class="status-badge status-approved">
+                            Approved
+                        </span>
+
+                    {% elif enrollment.status == "Rejected" %}
+
+                        <span class="status-badge status-rejected">
+                            Rejected
+                        </span>
+
+                    {% else %}
+
+                        <span class="badge bg-secondary">
+                            {{ enrollment.status }}
+                        </span>
+
+                    {% endif %}
+
+                </div>
+
+                {% if enrollment.remarks %}
+
+                <div class="alert alert-info">
+                    <strong>Remarks:</strong>
+                    {{ enrollment.remarks }}
+                </div>
+
+                {% endif %}
+
+            {% else %}
+
+                <div class="alert alert-warning">
+                    You do not have an enrollment application yet.
+                </div>
+
+                <a
+                    href="{{ url_for('student.enrollment') }}"
+                    class="btn btn-primary">
+                    Enroll Now
+                </a>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+</div>
+
+
+{% else %}
+
+<div class="dashboard-card text-center py-5">
+
+    <h4>Student Profile Not Found</h4>
+
+    <p class="text-muted">
+        Please complete your student profile first.
+    </p>
+
+    <a
+        href="{{ url_for('student.profile') }}"
+        class="btn btn-primary">
+        Complete Profile
+    </a>
+
+</div>
+
+{% endif %}
+
+{% endblock %}

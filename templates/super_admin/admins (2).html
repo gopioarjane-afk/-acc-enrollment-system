@@ -1,0 +1,215 @@
+{% extends "base.html" %}
+
+{% block title %}Manage Admins{% endblock %}
+
+{% block content %}
+
+<div class="page-header">
+    <h2>Manage Administrators</h2>
+
+    <p class="text-muted mb-0">
+        Create and manage administrator accounts.
+    </p>
+</div>
+
+
+<div class="row g-4">
+
+    <!-- CREATE ADMIN -->
+    <div class="col-lg-4">
+
+        <div class="profile-card">
+
+            <h5 class="mb-3">
+                Create Admin Account
+            </h5>
+
+            <form
+                method="POST"
+                action="{{ url_for('super_admin.create_admin') }}">
+
+                <div class="mb-3">
+
+                    <label class="form-label">
+                        Username
+                    </label>
+
+                    <input
+                        type="text"
+                        name="username"
+                        class="form-control"
+                        placeholder="Enter username"
+                        required>
+
+                </div>
+
+
+                <div class="mb-3">
+
+                    <label class="form-label">
+                        Full Name
+                    </label>
+
+                    <input
+                        type="text"
+                        name="full_name"
+                        class="form-control"
+                        placeholder="Enter full name"
+                        required>
+
+                </div>
+
+
+                <div class="mb-3">
+
+                    <label class="form-label">
+                        Email
+                    </label>
+
+                    <input
+                        type="email"
+                        name="email"
+                        class="form-control"
+                        placeholder="admin@example.com">
+
+                </div>
+
+
+                <div class="mb-3">
+
+                    <label class="form-label">
+                        Password
+                    </label>
+
+                    <input
+                        type="password"
+                        name="password"
+                        class="form-control"
+                        placeholder="Enter password"
+                        required>
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="btn btn-primary w-100">
+
+                    Create Admin
+
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+    <!-- ADMIN LIST -->
+    <div class="col-lg-8">
+
+        <div class="table-card">
+
+            <div class="d-flex justify-content-between align-items-center mb-3">
+
+                <h5 class="mb-0">
+                    Administrator Accounts
+                </h5>
+
+                <span class="badge bg-success">
+                    {{ admins|length }} Admin(s)
+                </span>
+
+            </div>
+
+
+            <div class="table-responsive">
+
+                <table class="table table-hover">
+
+                    <thead>
+
+                        <tr>
+                            <th>#</th>
+                            <th>Username</th>
+                            <th>Full Name</th>
+                            <th>Email</th>
+                            <th>Status</th>
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        {% for admin in admins %}
+
+                        <tr>
+
+                            <td>
+                                {{ admin.id }}
+                            </td>
+
+                            <td>
+                                <strong>
+                                    {{ admin.username }}
+                                </strong>
+                            </td>
+
+                            <td>
+                                {{ admin.full_name }}
+                            </td>
+
+                            <td>
+                                {{ admin.email or "-" }}
+                            </td>
+
+                            <td>
+
+                                {% if admin.status == "active" %}
+
+                                    <span class="badge bg-success">
+                                        Active
+                                    </span>
+
+                                {% else %}
+
+                                    <span class="badge bg-secondary">
+                                        {{ admin.status }}
+                                    </span>
+
+                                {% endif %}
+
+                            </td>
+
+                        </tr>
+
+                        {% else %}
+
+                        <tr>
+
+                            <td
+                                colspan="5"
+                                class="text-center text-muted py-4">
+
+                                No administrator accounts found.
+
+                            </td>
+
+                        </tr>
+
+                        {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

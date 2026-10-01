@@ -1,0 +1,204 @@
+{% extends "base.html" %}
+
+{% block title %}Manage Programs{% endblock %}
+
+{% block content %}
+
+<div class="page-header">
+    <h2>Manage Academic Programs</h2>
+
+    <p class="text-muted mb-0">
+        Add and view academic programs available for enrollment.
+    </p>
+</div>
+
+
+<div class="row g-4">
+
+    <!-- ADD PROGRAM -->
+    <div class="col-lg-4">
+
+        <div class="profile-card">
+
+            <h5 class="mb-3">
+                Add New Program
+            </h5>
+
+            <form method="POST">
+
+                <div class="mb-3">
+
+                    <label class="form-label">
+                        Program Code
+                    </label>
+
+                    <input
+                        type="text"
+                        name="program_code"
+                        class="form-control"
+                        placeholder="Example: BSIT"
+                        required>
+
+                </div>
+
+
+                <div class="mb-3">
+
+                    <label class="form-label">
+                        Program Name
+                    </label>
+
+                    <input
+                        type="text"
+                        name="program_name"
+                        class="form-control"
+                        placeholder="Example: Bachelor of Science in Information Technology"
+                        required>
+
+                </div>
+
+
+                <div class="mb-3">
+
+                    <label class="form-label">
+                        Description
+                    </label>
+
+                    <textarea
+                        name="description"
+                        class="form-control"
+                        rows="4"
+                        placeholder="Program description"></textarea>
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="btn btn-primary w-100">
+
+                    Add Program
+
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+    <!-- PROGRAM LIST -->
+    <div class="col-lg-8">
+
+        <div class="table-card">
+
+            <div class="d-flex justify-content-between align-items-center mb-3">
+
+                <div>
+                    <h5 class="mb-1">
+                        Available Programs
+                    </h5>
+
+                    <small class="text-muted">
+                        Programs available for student enrollment
+                    </small>
+                </div>
+
+                <span class="badge bg-success">
+                    {{ programs|length }} Program(s)
+                </span>
+
+            </div>
+
+
+            <div class="table-responsive">
+
+                <table class="table table-hover">
+
+                    <thead>
+
+                        <tr>
+                            <th>#</th>
+                            <th>Code</th>
+                            <th>Program Name</th>
+                            <th>Description</th>
+                            <th>Status</th>
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody>
+
+                        {% for program in programs %}
+
+                        <tr>
+
+                            <td>
+                                {{ program.id }}
+                            </td>
+
+                            <td>
+                                <strong>
+                                    {{ program.program_code }}
+                                </strong>
+                            </td>
+
+                            <td>
+                                {{ program.program_name }}
+                            </td>
+
+                            <td>
+                                {{ program.description or "-" }}
+                            </td>
+
+                            <td>
+
+                                {% if program.status == "active" %}
+
+                                    <span class="badge bg-success">
+                                        Active
+                                    </span>
+
+                                {% else %}
+
+                                    <span class="badge bg-secondary">
+                                        {{ program.status }}
+                                    </span>
+
+                                {% endif %}
+
+                            </td>
+
+                        </tr>
+
+                        {% else %}
+
+                        <tr>
+
+                            <td
+                                colspan="5"
+                                class="text-center text-muted py-4">
+
+                                No programs found.
+
+                            </td>
+
+                        </tr>
+
+                        {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

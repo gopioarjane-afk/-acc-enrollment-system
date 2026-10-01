@@ -1,0 +1,162 @@
+{% extends "base.html" %}
+
+{% block title %}Admin Dashboard{% endblock %}
+
+{% block content %}
+
+<div class="page-header">
+    <h2>Admin Dashboard</h2>
+
+    <p class="text-muted mb-0">
+        Welcome, {{ current_user.full_name }}.
+        Manage students and enrollment applications.
+    </p>
+</div>
+
+
+<div class="row g-4">
+
+    <!-- TOTAL STUDENTS -->
+    <div class="col-md-6 col-xl-3">
+
+        <div class="dashboard-card">
+
+            <div class="label">
+                Total Students
+            </div>
+
+            <h2 class="mt-2">
+                {{ total_students }}
+            </h2>
+
+            <a
+                href="{{ url_for('admin.students') }}"
+                class="btn btn-primary btn-sm mt-2">
+                View Students
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <!-- PENDING -->
+    <div class="col-md-6 col-xl-3">
+
+        <div class="dashboard-card">
+
+            <div class="label">
+                Pending Enrollments
+            </div>
+
+            <h2 class="mt-2">
+                {{ pending_enrollments }}
+            </h2>
+
+            <a
+                href="{{ url_for('admin.enrollments') }}"
+                class="btn btn-warning btn-sm mt-2">
+                Review
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <!-- APPROVED -->
+    <div class="col-md-6 col-xl-3">
+
+        <div class="dashboard-card">
+
+            <div class="label">
+                Approved Enrollments
+            </div>
+
+            <h2 class="mt-2">
+                {{ approved_enrollments }}
+            </h2>
+
+            <span class="text-success small">
+                Approved applications
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <!-- REJECTED -->
+    <div class="col-md-6 col-xl-3">
+
+        <div class="dashboard-card">
+
+            <div class="label">
+                Rejected Enrollments
+            </div>
+
+            <h2 class="mt-2">
+                {{ rejected_enrollments }}
+            </h2>
+
+            <span class="text-danger small">
+                Rejected applications
+            </span>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<div class="row g-4 mt-2">
+
+    <!-- STUDENT MANAGEMENT -->
+    <div class="col-md-6">
+
+        <div class="dashboard-card">
+
+            <h5>Student Management</h5>
+
+            <p class="text-muted">
+                View registered students and their profile
+                information.
+            </p>
+
+            <a
+                href="{{ url_for('admin.students') }}"
+                class="btn btn-primary">
+                Manage Students
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <!-- ENROLLMENT MANAGEMENT -->
+    <div class="col-md-6">
+
+        <div class="dashboard-card">
+
+            <h5>Enrollment Management</h5>
+
+            <p class="text-muted">
+                Review, approve, or reject student
+                enrollment applications.
+            </p>
+
+            <a
+                href="{{ url_for('admin.enrollments') }}"
+                class="btn btn-primary">
+                Manage Enrollments
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

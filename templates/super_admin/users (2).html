@@ -1,0 +1,160 @@
+{% extends "base.html" %}
+
+{% block title %}All Users{% endblock %}
+
+{% block content %}
+
+<div class="page-header">
+    <h2>All Users</h2>
+
+    <p class="text-muted mb-0">
+        View all accounts registered in the ACC Enrollment System.
+    </p>
+</div>
+
+
+<div class="table-card">
+
+    <div class="d-flex justify-content-between align-items-center mb-3">
+
+        <div>
+            <h5 class="mb-1">
+                User Accounts
+            </h5>
+
+            <small class="text-muted">
+                Super Admin, Admin, and Student accounts
+            </small>
+        </div>
+
+        <span class="badge bg-success">
+            {{ users|length }} User(s)
+        </span>
+
+    </div>
+
+
+    <div class="table-responsive">
+
+        <table class="table table-hover">
+
+            <thead>
+
+                <tr>
+                    <th>#</th>
+                    <th>Username</th>
+                    <th>Full Name</th>
+                    <th>Email</th>
+                    <th>Role</th>
+                    <th>Status</th>
+                    <th>Created</th>
+                </tr>
+
+            </thead>
+
+
+            <tbody>
+
+                {% for user in users %}
+
+                <tr>
+
+                    <td>
+                        {{ user.id }}
+                    </td>
+
+                    <td>
+                        <strong>
+                            {{ user.username }}
+                        </strong>
+                    </td>
+
+                    <td>
+                        {{ user.full_name }}
+                    </td>
+
+                    <td>
+                        {{ user.email or "-" }}
+                    </td>
+
+                    <td>
+
+                        {% if user.role == "super_admin" %}
+
+                            <span class="badge bg-dark">
+                                Super Admin
+                            </span>
+
+                        {% elif user.role == "admin" %}
+
+                            <span class="badge bg-primary">
+                                Admin
+                            </span>
+
+                        {% elif user.role == "student" %}
+
+                            <span class="badge bg-info text-dark">
+                                Student
+                            </span>
+
+                        {% else %}
+
+                            <span class="badge bg-secondary">
+                                {{ user.role }}
+                            </span>
+
+                        {% endif %}
+
+                    </td>
+
+
+                    <td>
+
+                        {% if user.status == "active" %}
+
+                            <span class="badge bg-success">
+                                Active
+                            </span>
+
+                        {% else %}
+
+                            <span class="badge bg-secondary">
+                                {{ user.status }}
+                            </span>
+
+                        {% endif %}
+
+                    </td>
+
+
+                    <td>
+                        {{ user.created_at }}
+                    </td>
+
+                </tr>
+
+                {% else %}
+
+                <tr>
+
+                    <td
+                        colspan="7"
+                        class="text-center text-muted py-4">
+
+                        No users found.
+
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+
+{% block title %}Login - ACC Enrollment System{% endblock %}
+
+{% block content %}
+
+<div class="login-wrapper">
+
+    <div class="login-card">
+
+        <div class="login-header">
+
+            <div class="acc-logo">
+                ACC
+            </div>
+
+            <h2>ACC Enrollment System</h2>
+
+            <p>Abuyog Community College</p>
+
+        </div>
+
+        <form method="POST">
+
+            <div class="mb-3">
+                <label class="form-label">Username</label>
+
+                <input
+                    type="text"
+                    name="username"
+                    class="form-control"
+                    placeholder="Enter username"
+                    required
+                    autofocus>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Password</label>
+
+                <input
+                    type="password"
+                    name="password"
+                    class="form-control"
+                    placeholder="Enter password"
+                    required>
+            </div>
+
+            <button
+                type="submit"
+                class="btn btn-primary w-100">
+                Login
+            </button>
+
+        </form>
+
+        <div class="demo-box mt-4">
+
+            <strong>Demo Accounts</strong>
+
+            <hr>
+
+            <small>
+                Super Admin: <b>superadmin</b>
+            </small>
+
+            <br>
+
+            <small>
+                Admin: <b>admin</b>
+            </small>
+
+            <br>
+
+            <small>
+                Student: <b>student</b>
+            </small>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

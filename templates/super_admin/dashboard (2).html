@@ -1,0 +1,181 @@
+{% extends "base.html" %}
+
+{% block title %}Super Admin Dashboard{% endblock %}
+
+{% block content %}
+
+<div class="page-header">
+    <h2>Super Admin Dashboard</h2>
+    <p class="text-muted mb-0">
+        Welcome, {{ current_user.full_name }}.
+        Manage the ACC Enrollment System from here.
+    </p>
+</div>
+
+
+<div class="row g-4">
+
+    <!-- TOTAL USERS -->
+    <div class="col-md-6 col-xl-3">
+
+        <div class="dashboard-card">
+
+            <div class="label">
+                Total Users
+            </div>
+
+            <h2 class="mt-2">
+                {{ total_users }}
+            </h2>
+
+            <a
+                href="{{ url_for('super_admin.users') }}"
+                class="btn btn-primary btn-sm mt-2">
+                View Users
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <!-- TOTAL ADMINS -->
+    <div class="col-md-6 col-xl-3">
+
+        <div class="dashboard-card">
+
+            <div class="label">
+                Administrators
+            </div>
+
+            <h2 class="mt-2">
+                {{ total_admins }}
+            </h2>
+
+            <a
+                href="{{ url_for('super_admin.admins') }}"
+                class="btn btn-primary btn-sm mt-2">
+                Manage Admins
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <!-- TOTAL STUDENTS -->
+    <div class="col-md-6 col-xl-3">
+
+        <div class="dashboard-card">
+
+            <div class="label">
+                Students
+            </div>
+
+            <h2 class="mt-2">
+                {{ total_students }}
+            </h2>
+
+            <span class="text-muted small">
+                Registered student accounts
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <!-- ENROLLMENTS -->
+    <div class="col-md-6 col-xl-3">
+
+        <div class="dashboard-card">
+
+            <div class="label">
+                Enrollments
+            </div>
+
+            <h2 class="mt-2">
+                {{ total_enrollments }}
+            </h2>
+
+            <span class="text-muted small">
+                Total enrollment applications
+            </span>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<div class="row g-4 mt-2">
+
+    <!-- ADMIN MANAGEMENT -->
+    <div class="col-md-4">
+
+        <div class="dashboard-card">
+
+            <h5>Admin Management</h5>
+
+            <p class="text-muted">
+                Create and manage administrator accounts.
+            </p>
+
+            <a
+                href="{{ url_for('super_admin.admins') }}"
+                class="btn btn-primary">
+                Manage Admins
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <!-- USER MANAGEMENT -->
+    <div class="col-md-4">
+
+        <div class="dashboard-card">
+
+            <h5>User Management</h5>
+
+            <p class="text-muted">
+                View all registered users and their roles.
+            </p>
+
+            <a
+                href="{{ url_for('super_admin.users') }}"
+                class="btn btn-primary">
+                View Users
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <!-- PROGRAM MANAGEMENT -->
+    <div class="col-md-4">
+
+        <div class="dashboard-card">
+
+            <h5>Program Management</h5>
+
+            <p class="text-muted">
+                Add and manage available academic programs.
+            </p>
+
+            <a
+                href="{{ url_for('super_admin.programs') }}"
+                class="btn btn-primary">
+                Manage Programs
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,182 @@
+{% extends "base.html" %}
+
+{% block title %}Enrollment Management{% endblock %}
+
+{% block content %}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <h2>Enrollment Management</h2>
+        <p class="text-muted mb-0">
+            Review and manage student enrollment applications.
+        </p>
+    </div>
+</div>
+
+<div class="card shadow-sm">
+    <div class="card-body">
+
+        <h5 class="mb-3">Student Enrollment Applications</h5>
+
+        {% if enrollments %}
+
+        <div class="table-responsive">
+
+            <table class="table table-bordered table-hover align-middle">
+
+                <thead class="table-success">
+                    <tr>
+                        <th>#</th>
+                        <th>Student ID</th>
+                        <th>Student Name</th>
+                        <th>Program</th>
+                        <th>School Year</th>
+                        <th>Semester</th>
+                        <th>Status</th>
+                        <th>Remarks</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    {% for enrollment in enrollments %}
+
+                    <tr>
+
+                        <td>
+                            {{ enrollment["id"] }}
+                        </td>
+
+                        <td>
+                            <strong>
+                                {{ enrollment["student_id"] }}
+                            </strong>
+                        </td>
+
+                        <td>
+                            {{ enrollment["first_name"] }}
+                            {{ enrollment["last_name"] }}
+                        </td>
+
+                        <td>
+                            <strong>
+                                {{ enrollment["program_code"] }}
+                            </strong>
+                            <br>
+                            <small class="text-muted">
+                                {{ enrollment["program_name"] }}
+                            </small>
+                        </td>
+
+                        <td>
+                            {{ enrollment["school_year"] }}
+                        </td>
+
+                        <td>
+                            {{ enrollment["semester"] }}
+                        </td>
+
+                        <td>
+
+                            {% if enrollment["status"] == "Pending" %}
+
+                                <span class="badge bg-warning text-dark">
+                                    Pending
+                                </span>
+
+                            {% elif enrollment["status"] == "Approved" %}
+
+                                <span class="badge bg-success">
+                                    Approved
+                                </span>
+
+                            {% elif enrollment["status"] == "Rejected" %}
+
+                                <span class="badge bg-danger">
+                                    Rejected
+                                </span>
+
+                            {% else %}
+
+                                <span class="badge bg-secondary">
+                                    {{ enrollment["status"] }}
+                                </span>
+
+                            {% endif %}
+
+                        </td>
+
+                        <td>
+                            {{ enrollment["remarks"] or "-" }}
+                        </td>
+
+                        <td>
+
+                            {% if enrollment["status"] == "Pending" %}
+
+                            <form
+                                method="POST"
+                                action="{{ url_for('admin.review_enrollment', enrollment_id=enrollment['id']) }}"
+                                class="d-flex flex-column gap-2"
+                            >
+
+                                <input
+                                    type="text"
+                                    name="remarks"
+                                    class="form-control form-control-sm"
+                                    placeholder="Remarks (optional)"
+                                >
+
+                                <button
+                                    type="submit"
+                                    name="action"
+                                    value="Approved"
+                                    class="btn btn-success btn-sm"
+                                >
+                                    ✓ Approve
+                                </button>
+
+                                <button
+                                    type="submit"
+                                    name="action"
+                                    value="Rejected"
+                                    class="btn btn-danger btn-sm"
+                                >
+                                    ✕ Reject
+                                </button>
+
+                            </form>
+
+                            {% else %}
+
+                                <span class="text-muted">
+                                    Already reviewed
+                                </span>
+
+                            {% endif %}
+
+                        </td>
+
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+        {% else %}
+
+        <div class="alert alert-info">
+            No enrollment applications found.
+        </div>
+
+        {% endif %}
+
+    </div>
+</div>
+
+{% endblock %}

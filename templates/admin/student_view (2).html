@@ -1,0 +1,278 @@
+{% extends "base.html" %}
+
+{% block title %}Student Details{% endblock %}
+
+{% block content %}
+
+<div class="page-header">
+    <h2>Student Details</h2>
+
+    <p class="text-muted mb-0">
+        View complete student information and enrollment history.
+    </p>
+</div>
+
+
+<div class="row g-4">
+
+    <!-- STUDENT INFORMATION -->
+    <div class="col-lg-5">
+
+        <div class="profile-card">
+
+            <h5 class="mb-4">
+                Personal Information
+            </h5>
+
+
+            <div class="mb-3">
+                <small class="text-muted">
+                    Student ID
+                </small>
+
+                <div class="fw-bold">
+                    {{ student.student_id }}
+                </div>
+            </div>
+
+
+            <div class="mb-3">
+                <small class="text-muted">
+                    Full Name
+                </small>
+
+                <div class="fw-bold">
+                    {{ student.first_name }}
+
+                    {% if student.middle_name %}
+                        {{ student.middle_name }}
+                    {% endif %}
+
+                    {{ student.last_name }}
+                </div>
+            </div>
+
+
+            <div class="mb-3">
+                <small class="text-muted">
+                    Username
+                </small>
+
+                <div>
+                    {{ student.username }}
+                </div>
+            </div>
+
+
+            <div class="mb-3">
+                <small class="text-muted">
+                    Email
+                </small>
+
+                <div>
+                    {{ student.email or "-" }}
+                </div>
+            </div>
+
+
+            <div class="mb-3">
+                <small class="text-muted">
+                    Birthdate
+                </small>
+
+                <div>
+                    {{ student.birthdate or "-" }}
+                </div>
+            </div>
+
+
+            <div class="mb-3">
+                <small class="text-muted">
+                    Gender
+                </small>
+
+                <div>
+                    {{ student.gender or "-" }}
+                </div>
+            </div>
+
+
+            <div class="mb-3">
+                <small class="text-muted">
+                    Phone
+                </small>
+
+                <div>
+                    {{ student.phone or "-" }}
+                </div>
+            </div>
+
+
+            <div class="mb-3">
+                <small class="text-muted">
+                    Address
+                </small>
+
+                <div>
+                    {{ student.address or "-" }}
+                </div>
+            </div>
+
+
+            <div>
+
+                {% if student.status == "active" %}
+
+                    <span class="badge bg-success">
+                        Active Account
+                    </span>
+
+                {% else %}
+
+                    <span class="badge bg-secondary">
+                        {{ student.status }}
+                    </span>
+
+                {% endif %}
+
+            </div>
+
+
+            <a
+                href="{{ url_for('admin.students') }}"
+                class="btn btn-secondary mt-4">
+
+                Back to Students
+
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <!-- ENROLLMENT HISTORY -->
+    <div class="col-lg-7">
+
+        <div class="table-card">
+
+            <h5 class="mb-4">
+                Enrollment History
+            </h5>
+
+
+            <div class="table-responsive">
+
+                <table class="table table-hover">
+
+                    <thead>
+
+                        <tr>
+                            <th>Program</th>
+                            <th>School Year</th>
+                            <th>Semester</th>
+                            <th>Status</th>
+                            <th>Submitted</th>
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody>
+
+                        {% for enrollment in enrollments %}
+
+                        <tr>
+
+                            <td>
+
+                                <strong>
+                                    {{ enrollment.program_code }}
+                                </strong>
+
+                                <br>
+
+                                <small class="text-muted">
+                                    {{ enrollment.program_name }}
+                                </small>
+
+                            </td>
+
+
+                            <td>
+                                {{ enrollment.school_year }}
+                            </td>
+
+
+                            <td>
+                                {{ enrollment.semester }}
+                            </td>
+
+
+                            <td>
+
+                                {% if enrollment.status == "Pending" %}
+
+                                    <span class="status-badge status-pending">
+                                        Pending
+                                    </span>
+
+                                {% elif enrollment.status == "Approved" %}
+
+                                    <span class="status-badge status-approved">
+                                        Approved
+                                    </span>
+
+                                {% elif enrollment.status == "Rejected" %}
+
+                                    <span class="status-badge status-rejected">
+                                        Rejected
+                                    </span>
+
+                                {% else %}
+
+                                    <span class="badge bg-secondary">
+                                        {{ enrollment.status }}
+                                    </span>
+
+                                {% endif %}
+
+                            </td>
+
+
+                            <td>
+                                {{ enrollment.submitted_at }}
+                            </td>
+
+                        </tr>
+
+
+                        {% else %}
+
+                        <tr>
+
+                            <td
+                                colspan="5"
+                                class="text-center text-muted py-4">
+
+                                No enrollment records found.
+
+                            </td>
+
+                        </tr>
+
+                        {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

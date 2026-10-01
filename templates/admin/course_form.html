@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}Add Course{% endblock %}
+{% block content %}
+<h2 class="fw-bold mb-3">Add Course</h2>
+<div class="card shadow-sm border-0">
+<div class="card-body">
+<form method="post">
+<div class="row g-3">
+<div class="col-md-4"><label class="form-label">Course Code</label><input class="form-control" name="code" required></div>
+<div class="col-md-8"><label class="form-label">Course Name</label><input class="form-control" name="name" required></div>
+<div class="col-md-2"><label class="form-label">Units</label><input class="form-control" type="number" name="units" value="3" min="1" required></div>
+<div class="col-md-5"><label class="form-label">Instructor</label><input class="form-control" name="instructor"></div>
+<div class="col-md-5"><label class="form-label">Schedule</label><input class="form-control" name="schedule"></div>
+<div class="col-md-3"><label class="form-label">Capacity</label><input class="form-control" type="number" name="capacity" value="40" min="1" required></div>
+</div>
+<button class="btn btn-primary mt-4">Save Course</button>
+<a class="btn btn-light mt-4" href="{{ url_for('admin.courses') }}">Cancel</a>
+</form>
+</div>
+</div>
+{% endblock %}

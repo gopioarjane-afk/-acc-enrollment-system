@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}Login - ACC Enrollment{% endblock %}
+{% block content %}
+<div class="row justify-content-center align-items-center" style="min-height:90vh">
+  <div class="col-md-5">
+    <div class="card shadow border-0 rounded-4">
+      <div class="card-body p-5">
+        <h2 class="fw-bold mb-1">ACC Enrollment System</h2>
+        <p class="text-muted mb-4">Sign in to continue</p>
+        <form method="post">
+          <label class="form-label">Username</label>
+          <input class="form-control mb-3" name="username" required autofocus>
+          <label class="form-label">Password</label>
+          <input class="form-control mb-4" type="password" name="password" required>
+          <button class="btn btn-primary w-100">Login</button>
+        </form>
+        <div class="mt-4 small text-muted">
+          Demo accounts are listed in README.md.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
